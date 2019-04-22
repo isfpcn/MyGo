@@ -13,9 +13,9 @@ func main() {
 	//for i := 0; i < len(s); i++ {
 	//	b[i] = s[i]
 	//}
-	nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8
+
 	//用copy方式，前提是必须指定[]byte的len
-	copy(b[:],s)
+	copy(b[:], s)
 
 	fmt.Println(b)
 
@@ -23,9 +23,9 @@ func main() {
 
 	length := len(name)
 
-	bb := make([]byte,length)
+	bb := make([]byte, length)
 
-	copy(bb,name)
+	copy(bb, name)
 
 	fmt.Println(string(bb))
 }
