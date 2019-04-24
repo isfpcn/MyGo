@@ -64,7 +64,7 @@ func (e *Elasti) Create(user *User) error {
 
 //通过ID获取
 func (e *Elasti) Get(id string) (user *User, err error) {
-
+	// 7.0 将移除type version 7.0 还能用
 	result, i := e.client.Get().Index(e.index).Type(e.etype).Id(id).Do(context.Background())
 
 	if i != nil {
@@ -80,6 +80,16 @@ func (e *Elasti) Get(id string) (user *User, err error) {
 	}
 
 	return &u, nil
+}
+
+//删除
+func (e *Elasti) Delete(id string) error {
+
+	if _, err := e.client.Delete().Index(e.index).Type(e.etype).Id(id).Do(context.Background()); err != nil {
+		return err
+	}
+
+	return nil
 }
 
 func elasticClient(url string) (*elastic.Client, error) {
@@ -123,4 +133,9 @@ func main() {
 	}
 
 	fmt.Printf("%+v", user)
+
+	err = e.Delete("vMOmSmoB6i_QyiY4e3vw")
+	if err != nil {
+		panic("delete fail")
+	}
 }
